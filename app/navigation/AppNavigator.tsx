@@ -1,28 +1,22 @@
-// navigation/AppNavigator.tsx
-import React, { useContext } from "react";
+// navigation/AppNavigator.tsx (or wherever you define your navigators)
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { AuthContext } from "../context/AuthContext";
-import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
+import LoginScreen from "../screens/LoginScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import HomeScreen from "../screens/HomeScreen";
+// Make sure this is the correct import path
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-  const { user } = useContext(AuthContext)!;
-
   return (
-    <Stack.Navigator>
-      {user ? (
-        <>
-          <Stack.Screen name="Home" component={HomeScreen} />
-        </>
-      ) : (
-        <>
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Signup" component={SignupScreen} />
-        </>
-      )}
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      {/* Add other screens here */}
     </Stack.Navigator>
   );
 };
